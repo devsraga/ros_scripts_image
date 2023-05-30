@@ -1,0 +1,14 @@
+#!/usr/bin/env python3
+import rospy
+from std_msgs.msg import String
+
+def sub_callback():
+    print(msg)
+
+def main():
+    rospy.init_node("dev_pub", anonymous=True)
+    rospy.loginfo("dev_pub node is initialised")
+    pub = rospy.Publisher('dev_chatter', String, queue_size=10)
+    
+if __name__ == '__main__':
+    main()
