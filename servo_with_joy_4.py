@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import rospy
-from std_msgs.msg import UInt16
+from std_msgs.msg import UInt16, Float64MultiArray
 from sensor_msgs.msg import Joy
 import cv2 as cv
 import numpy as np
@@ -18,12 +18,14 @@ def joy_call(data):
     j = data
     pitch = j.axes[1]
     yaw = j.axes[4]
-    s = int(90*(pitch+1))
-    s2 = int(90*(yaw+1))
+    s = 90*(pitch+1)
+    s2 = 90*(yaw+1)
     print("pitch:  " + str(s))
     print("yaw:  " + str(s2))
-    pub.publish(s)
-    pub2.publish(s2)
+    array = [s, s2]
+    servo_data = Float64MultiArray()  # the data to be sent, initialise the array
+    servo_data.data = array # assign the array with the value you want to send
+    pub.publish(servo_data)
 
 
 if __name__ == '__main__':
@@ -34,8 +36,8 @@ if __name__ == '__main__':
 
     # rospy.init_node("dev_pub", anonymous=True)
     rospy.loginfo("dev_pub node is initialised")
-    pub = rospy.Publisher('/servo', UInt16, queue_size=10)
-    pub2 = rospy.Publisher('/servo_2',UInt16, queue_size = 10)
+    pub = rospy.Publisher('/servo', Float64MultiArray, queue_size=10)
+    
     # pub.publish(s)
     rate = rospy.Rate(1)
     rate.sleep()
