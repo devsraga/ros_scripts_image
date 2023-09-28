@@ -164,7 +164,7 @@ void servo_callback_joystick_cammonds( const sensor_msgs::Joy& joy_msg){
       float motors_positions_raw[] = {joy_msg.axes[0], joy_msg.axes[1], joy_msg.axes[2], joy_msg.axes[3], joy_msg.axes[4], joy_msg.axes[5]};
       
         for (int i=0; i < 6; i++){
-          motors_positions[i] = 180*(motors_positions_raw[i]);
+          motors_positions[i] = 180*(motors_positions_raw[i] +1);
         }
 
 
