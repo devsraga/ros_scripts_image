@@ -290,8 +290,8 @@ for(int i=1; i<=6; i++){
 
 void loop(){ 
 
-sensor_msgs::JointState real_joint_state;
-ros::Publisher real_joint_state__publisher("real_joint_state", &real_joint_state);
+
+ 
     
     
     for (int i = 0; i<6; i++){
